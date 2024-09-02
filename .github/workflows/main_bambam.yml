@@ -61,8 +61,8 @@ jobs:
       - name: List all files in the workspace after download
         run: ls -alR  # 모든 디렉토리 및 파일을 재귀적으로 나열
 
-      - name: List build directory after download
-        run: ls -al ${{ github.workspace }}/build/libs/  # 다운로드된 파일 확인
+      # - name: List build directory after download
+      #   run: ls -al ${{ github.workspace }}/build/libs/  # 다운로드된 파일 확인
 
       - name: Login to Azure
         uses: azure/login@v2
