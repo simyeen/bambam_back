@@ -25,6 +25,12 @@ jobs:
       - name: Build with Gradle
         run: ./gradlew clean build
 
+      - name: Show current directory
+        run: pwd  # 현재 작업 디렉토리를 출력
+
+      - name: List all files in the workspace after build
+        run: ls -alR  # 모든 디렉토리 및 파일을 재귀적으로 나열
+
       - name: List build directory
         run: ls -al build/libs/  # 빌드된 파일 확인
 
@@ -49,9 +55,15 @@ jobs:
         with:
           name: java-app
 
-      - name: List all files after download
-        run: ls -al ${{ github.workspace }}/build/libs/
-      
+      - name: Show current directory after download
+        run: pwd  # 현재 작업 디렉토리를 출력
+
+      - name: List all files in the workspace after download
+        run: ls -alR  # 모든 디렉토리 및 파일을 재귀적으로 나열
+
+      - name: List build directory after download
+        run: ls -al ${{ github.workspace }}/build/libs/  # 다운로드된 파일 확인
+
       - name: Login to Azure
         uses: azure/login@v2
         with:
