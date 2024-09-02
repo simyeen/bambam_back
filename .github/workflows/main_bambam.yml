@@ -59,4 +59,4 @@ jobs:
         with:
           app-name: 'bambam'
           slot-name: 'Production'
-          package: '*.jar'
+          package: 'build/libs/*.jar'  # 특정 JAR 파일을 지정하도록 경로 수정
