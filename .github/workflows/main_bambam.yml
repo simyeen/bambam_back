@@ -48,6 +48,9 @@ jobs:
         uses: actions/download-artifact@v4
         with:
           name: java-app
+
+      - name: List all files after download
+        run: ls -al ${{ github.workspace }}/build/libs/
       
       - name: Login to Azure
         uses: azure/login@v2
@@ -62,4 +65,4 @@ jobs:
         with:
           app-name: 'bambam'
           slot-name: 'Production'
-          package: 'build/libs/bambam_backend-0.0.1-SNAPSHOT.jar'
+          package: '${{ github.workspace }}/build/libs/bambam_backend-0.0.1-SNAPSHOT.jar'  # 절대 경로 사용
