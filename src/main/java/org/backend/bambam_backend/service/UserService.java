@@ -24,6 +24,12 @@ public class UserService {
     @Autowired
     private ModelMapper modelMapper;
 
+    public UserDTO getUserInfo(String username) {
+        User user = userRepository.findByUsername(username);
+
+        return modelMapper.map(user, UserDTO.class);
+    }
+
     public void joinProcess(UserDTO userDTO) {
 
         String username = userDTO.getUsername();

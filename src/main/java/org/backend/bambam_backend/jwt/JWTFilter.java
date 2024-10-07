@@ -59,7 +59,6 @@ public class JWTFilter extends OncePerRequestFilter {
         String username = jwtUtil.getUsername(token);
         String role = jwtUtil.getRole(token);
 
-        System.out.println("???????????????");
         System.out.println("JWTFilter username : " + username);
         System.out.println("JWTFilter role : " + role);
 

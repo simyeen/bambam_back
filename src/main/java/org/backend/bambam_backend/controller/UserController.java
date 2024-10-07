@@ -10,24 +10,39 @@ import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Optional;
 
 @RestController
-//@RequestMapping("/api/users")
+@RequestMapping("/api/users")
 public class UserController {
 
     @Autowired
     private UserService userService;
 
+    // jwt 토큰을 통해서 유저정보 가져오기
+    @GetMapping("/info")
+    public UserDTO getUserInfo(){
+        String username = SecurityContextHolder.getContext().getAuthentication().getName();
+
+        System.out.println(username + " 이걸로 정보가져오기");
+        UserDTO userDTO = userService.getUserInfo(username);
+
+        return userDTO;
+    }
+
     // 인증 로직 -> formData 기반
     @PostMapping("/join")
-    public String joinProcess(UserDTO userDTO) {
-
+    public String joinProcess(@RequestBody UserDTO userDTO) {
+        // Assuming userDTO is already being populated from the request body.
         System.out.println("join Controller 실행 :" + " " + userDTO.getUsername() + " " + userDTO.getPassword() + " " + userDTO.getEmail());
+
+        // Passing the userDTO to the service layer for further processing.
         userService.joinProcess(userDTO);
+
         return "ok";
     }
 
